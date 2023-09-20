@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/backend?characterEncoding=utf-8
+    username: root
+    password: 1234
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    # กำหนกให้แสดงคำสั่ง SQL บน terminal
+    # ภาษา SQL แบ่งคำสั่งออกเป็น 2 ส่วน
+    # 1 ส่วนที่นิยามข้อมูล (Data Definition Language: DDL) เช่น คำสั่ง create/alter/drop table
+    # 2 ส่วนจัดการข้อมูล (Data Manipulation Language: DML) เช่น คำสั่ง select , insert, update, delete
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+backend:
+  jwt:
+    expired: 360000
+    secret: private-key

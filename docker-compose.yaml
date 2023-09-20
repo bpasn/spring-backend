@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  database:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: '1234'
+      MYSQL_DATABASE: 'backend'
+      MYSQL_USER: 'admin'
+      MYSQL_PASS: '1234'
+    restart: always
