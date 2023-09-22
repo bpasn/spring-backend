@@ -20,3 +20,5 @@ backend:
   jwt:
     expired: 360000
     secret: private-key
+
+mount_path: src/main/resources

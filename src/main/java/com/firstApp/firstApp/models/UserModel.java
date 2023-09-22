@@ -1,6 +1,5 @@
 package com.firstApp.firstApp.models;
 
-import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data

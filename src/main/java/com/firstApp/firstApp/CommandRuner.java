@@ -6,7 +6,6 @@ import com.firstApp.firstApp.repository.DistrictRepository;
 import com.firstApp.firstApp.repository.SubDistrictRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ResourceUtils;
 
 import java.io.*;

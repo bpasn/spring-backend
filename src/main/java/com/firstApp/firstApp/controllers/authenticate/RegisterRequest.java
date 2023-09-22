@@ -1,4 +1,4 @@
-package com.firstApp.firstApp.request;
+package com.firstApp.firstApp.controllers.authenticate;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -6,7 +6,7 @@ import lombok.Data;
 
 
 @Data
-public class UserRequest {
+public class RegisterRequest {
     @NotBlank(message = "First name is required.")
     private String firstName;
     @NotBlank(message = "Last name is required.")

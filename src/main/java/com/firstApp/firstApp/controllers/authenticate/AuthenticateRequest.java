@@ -1,11 +1,11 @@
-package com.firstApp.firstApp.request;
+package com.firstApp.firstApp.controllers.authenticate;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-public class AuthenticationRequest {
+public class AuthenticateRequest {
     @NotBlank(message = "Email is required.")
     @Pattern(regexp = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,}$", message = "Email Invalid Format.")
     private String email;

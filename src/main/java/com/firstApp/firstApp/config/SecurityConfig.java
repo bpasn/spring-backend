@@ -5,11 +5,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.firstApp.firstApp.Exception.AuthException;
+import com.firstApp.firstApp.repository.UserRepository;
 
 @Configuration
 public class SecurityConfig {
@@ -18,19 +18,20 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthException authException;
 
-    public SecurityConfig(AuthenticationProvider authenticationProvider, JwtAuthenticationFilter jwtAuthFilter,AuthException authException) {
-        this.authenticationProvider = authenticationProvider;
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthFilter, AuthenticationProvider authenticationProvider,AuthException autheException) {
         this.jwtAuthFilter = jwtAuthFilter;
-        this.authException = authException;
+        this.authenticationProvider = authenticationProvider;
+        this.authException = autheException;
     }
 
+   
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(c -> c.disable())
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/api/v1/auth/**")
+                        auth.requestMatchers("/api/v1/auth/**","/actuator/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())

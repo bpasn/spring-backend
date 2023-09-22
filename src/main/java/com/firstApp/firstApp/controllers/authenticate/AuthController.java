@@ -1,8 +1,5 @@
-package com.firstApp.firstApp.controllers;
+package com.firstApp.firstApp.controllers.authenticate;
 
-import com.firstApp.firstApp.response.AuthenticateResponse;
-import com.firstApp.firstApp.request.AuthenticationRequest;
-import com.firstApp.firstApp.request.UserRequest;
 import com.firstApp.firstApp.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +19,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticateResponse> create( @RequestBody @Valid UserRequest req)
+    public ResponseEntity<AuthenticateResponse> create( @RequestBody @Valid RegisterRequest req)
     {
 
         return ResponseEntity.ok(userService.create(req.getFirstName(), req.getLastName(),req.getEmail(),req.getPassword()));
     }
 
     @PostMapping("/authentication")
-    public ResponseEntity<AuthenticateResponse> authentication(@RequestBody @Valid AuthenticationRequest req){
+    public ResponseEntity<AuthenticateResponse> authentication(@RequestBody @Valid AuthenticateRequest req){
         return ResponseEntity.ok(userService.authentication(req));
     }
 }
