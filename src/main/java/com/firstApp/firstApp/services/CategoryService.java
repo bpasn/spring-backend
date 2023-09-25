@@ -2,6 +2,7 @@ package com.firstApp.firstApp.services;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -57,7 +58,13 @@ public class CategoryService implements ICategory {
     public List<CategoriesResponse> get() {
         // TODO Auto-generated method stub
         List<CategoriesEntity> categories = repository.findAll();
-        return null;
+        return categoryMapper.entityToModal(categories);
+    }
+
+    @Override
+    public CategoriesResponse getById(Integer id) {
+        CategoriesEntity entity = repository.findById(id).orElseThrow(() -> new BaseException("Categories not found."));
+        return categoryMapper.entityToModal(entity);
     }
 
 }

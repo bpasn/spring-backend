@@ -1,7 +1,6 @@
 package com.firstApp.firstApp.entity;
 
 import jakarta.persistence.Entity;
-import lombok.Builder;
 import lombok.Data;
 
 @Entity(name = "categories")

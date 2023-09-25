@@ -7,7 +7,7 @@ import com.firstApp.firstApp.models.UserModel;
 
 import java.util.List;
 
-// @Mapper(componentModel = "spring")
+ @Mapper(componentModel = "spring")
 public interface UserMapper {
     UserModel userEntityToModel(UserEntity entity);
     List<UserModel> userEntityToModel(List<UserEntity> entity);

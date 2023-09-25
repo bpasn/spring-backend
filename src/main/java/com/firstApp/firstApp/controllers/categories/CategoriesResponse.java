@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class CategoriesResponse {
-    private String cName;
-    private String cDescription;
-    private String cImage;
+    private Integer id;
+    private String categoryName;
+    private String description;
+    private String image;
 }

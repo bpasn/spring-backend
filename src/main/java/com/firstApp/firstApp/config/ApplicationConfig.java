@@ -30,7 +30,6 @@ public class ApplicationConfig {
 
     @Bean
     UserDetailsService userDetailsService() {
-        log.info("Bean User Detail Service");
         return username -> (UserDetails) userRepository.findByEmail(username).orElseThrow(() -> {
             throw new BaseException("Email not found",HttpStatus.CONFLICT);
         });
