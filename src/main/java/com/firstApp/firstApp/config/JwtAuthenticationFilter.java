@@ -47,36 +47,66 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @Nonnull HttpServletRequest request,
             @Nonnull HttpServletResponse response,
             @Nonnull FilterChain filterChain) throws ServletException, IOException {
+
         final String authHeader = request.getHeader("Authorization");
-        final String jwt;
-        final String userEmail;
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+
+        if (isTokenMissingOrInvalid(authHeader)) {
             filterChain.doFilter(request, response);
             return;
         }
         try {
-            jwt = authHeader.substring(7);
+            final String jwt = extractJwtToken(authHeader);
             if (jwt == null || jwt.equals("null")){
-                resolver.resolveException(request, response, null, new BaseException("Token is Invalid"));
+                handleInvalidToken(request,response);
                 return;
             }
-                
-            userEmail = jwtService.extractUsername(jwt); // todo extract the userEmail from JWT token;
-
-            if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-                if (jwtService.isTokenValid(jwt, userDetails)) {
-                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,
-                            null, userDetails.getAuthorities());
-
-                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authToken);
-                }
+            String userEmail = jwtService.extractUsername(jwt);
+            if(userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
+                handleValidToken(userEmail,jwt,request);
             }
+//            userEmail = jwtService.extractUsername(jwt); // todo extract the userEmail from JWT token;
+//
+//            if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+//                UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+//                if (jwtService.isTokenValid(jwt, userDetails)) {
+//                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,
+//                            null, userDetails.getAuthorities());
+//
+//                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+//                    SecurityContextHolder.getContext().setAuthentication(authToken);
+//                }
+//            }
             filterChain.doFilter(request, response);
         } catch (Exception e) {
             log.error("EXCEPTION AUTHENTICATION {}", e.getMessage());
             resolver.resolveException(request, response, null, new BaseException(e.getMessage(), null));
+        }
+    }
+
+    private boolean isTokenMissingOrInvalid(String authHeader){
+        return authHeader == null || !authHeader.startsWith("Bearer ");
+    }
+
+    private String extractJwtToken(String authHeader){
+        return authHeader.substring(7);
+    }
+
+
+    private void handleInvalidToken(HttpServletRequest request, HttpServletResponse response){
+        resolver.resolveException(request,response,null,new BaseException("Token is Invalid"));
+    }
+
+    private void handleValidToken(String userEmail,String jwt,HttpServletRequest request){
+        UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
+        if(jwtService.isTokenValid(jwt,userDetails)){
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                    userDetails,
+                    null,
+                    userDetails.getAuthorities()
+            );
+
+            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            SecurityContextHolder.getContext().setAuthentication(authToken);
         }
     }
 }

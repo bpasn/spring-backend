@@ -1,4 +1,4 @@
-package com.firstApp.firstApp.request;
+package com.firstApp.firstApp.controllers.auth;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

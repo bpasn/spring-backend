@@ -2,6 +2,7 @@ package com.firstApp.firstApp.services;
 
 import java.io.IOException;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.firstApp.firstApp.Exception.BaseException;
@@ -24,7 +25,7 @@ public class CategoryService implements ICategory {
     @Override
     public String create(ReqCreateCategory request) throws IOException {
         if (repository.existsBycName(request.getCName())) {
-            throw new BaseException("Categories is already.");
+            throw new BaseException("Categories is already.", HttpStatus.ACCEPTED);
         }
         String pathImage = helper.saveFile(request.getCImage());
         CategoriesEntity categoriesEntity = new CategoriesEntity();

@@ -18,10 +18,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticateResponse> register(@Valid @RequestBody com.firstApp.firstApp.controllers.auth.ReqUserRegister request){
+    public ResponseEntity<AuthenticateResponse> register(@Valid @RequestBody ReqUserRegister  request){
         return ResponseEntity.ok(userService.create(request.getFirstName(),request.getLastName(), request.getEmail(), request.getPassword()));
     }
 
     @PostMapping("/authentication")
-    public ResponseEntity<AuthenticateResponse> authentication(@Valid @RequestBody)
+    public ResponseEntity<AuthenticateResponse> authentication(@Valid @RequestBody AuthenticationRequest request){
+        return ResponseEntity.ok(userService.authentication(request));
+
+    }
 }

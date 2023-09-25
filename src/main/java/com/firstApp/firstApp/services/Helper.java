@@ -8,18 +8,26 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
+@Log4j2
 public class Helper {
 
     @Value("${mount_path}")
     private String BASE_PATH;
+
+    private final String[] supportType = {"image/png","image/jpeg"};
     public String saveFile(MultipartFile cImage) throws IOException {        
         // Define the base path and the subfolder for categories
+        if(!Arrays.asList(supportType).contains(cImage.getContentType())){
+            throw new IOException(String.format("%s File Type  Doesn't Support.",cImage.getContentType()));
+        }
         Path basePath = Paths.get(BASE_PATH);
         Path categoriesFolder = basePath.resolve("static/categories");
 
@@ -28,6 +36,7 @@ public class Helper {
             Files.createDirectories(categoriesFolder);
         }
 
+        log.info(cImage.getContentType());
         // Get the original file name and its byte data
         String fileName = cImage.getOriginalFilename();
         byte[] getByte = cImage.getBytes();
@@ -37,7 +46,7 @@ public class Helper {
         Path targetFilePath = categoriesFolder.resolve(fileName);
 
         // Write the file using try-with-resources
-        try (OutputStream os = new FileOutputStream(String.valueOf(targetFilePath))) {
+        try (OutputStream os = Files.newOutputStream(targetFilePath)) {
             os.write(getByte);
         }
 

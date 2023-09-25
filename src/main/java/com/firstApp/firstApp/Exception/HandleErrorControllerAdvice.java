@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 @Log4j2
-public class HandleError {
+public class HandleErrorControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponseValidate> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {

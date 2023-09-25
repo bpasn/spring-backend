@@ -32,7 +32,7 @@ public class CategoriesController {
     ResponseEntity<String> create(@Valid @ModelAttribute ReqCreateCategory request)
             throws BaseException, MethodArgumentNotValidException, IOException {
         service.create(request);
-        return ResponseEntity.ok("Create Successfully.");
+        return ResponseEntity.status(201).body("Create Successfully.");
     }
 
     @PutMapping("update/{id}")
