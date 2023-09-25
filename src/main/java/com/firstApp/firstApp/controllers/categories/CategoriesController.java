@@ -35,13 +35,12 @@ public class CategoriesController {
         return ResponseEntity.ok("Create Successfully.");
     }
 
-    @PutMapping("/{id}")
-    ResponseEntity<String> update(@PathVariable String id) {
-        service.update(Integer.parseInt(id));
+    @PutMapping("update/{id}")
+    ResponseEntity<String> update(@Valid @ModelAttribute ReqCreateCategory request) {
         return ResponseEntity.ok("Update Successfully.");
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     ResponseEntity<String> delete(@PathVariable String id) {
         service.delete(Integer.parseInt(id));
         return ResponseEntity.ok("Delete Successfully.");

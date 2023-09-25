@@ -1,10 +1,9 @@
 package com.firstApp.firstApp.interfaces;
-
-import com.firstApp.firstApp.controllers.authenticate.AuthenticateResponse;
-import com.firstApp.firstApp.controllers.authenticate.AuthenticateRequest;
+import com.firstApp.firstApp.controllers.auth.AuthenticateResponse;
+import com.firstApp.firstApp.controllers.auth.AuthenticationRequest;
 
 public interface IUserService {
-    AuthenticateResponse create(String firstName, String lastName, String email, String password);
+   AuthenticateResponse create(String firstName, String lastName, String email, String password);
 
-    AuthenticateResponse authentication(AuthenticateRequest req);
+    AuthenticateResponse authentication(AuthenticationRequest req);
 }

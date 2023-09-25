@@ -1,12 +1,11 @@
 package com.firstApp.firstApp.services;
 
 import com.firstApp.firstApp.Exception.BaseException;
-import com.firstApp.firstApp.controllers.authenticate.AuthenticateResponse;
-import com.firstApp.firstApp.controllers.authenticate.AuthenticateRequest;
+import com.firstApp.firstApp.controllers.auth.AuthenticateResponse;
+import com.firstApp.firstApp.controllers.auth.AuthenticationRequest;
 import com.firstApp.firstApp.entity.UserEntity;
 import com.firstApp.firstApp.enums.Role;
 import com.firstApp.firstApp.interfaces.IUserService;
-import com.firstApp.firstApp.mapper.UserMapper;
 import com.firstApp.firstApp.repository.UserRepository;
 
 import java.util.Optional;
@@ -55,7 +54,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public AuthenticateResponse authentication(AuthenticateRequest req) {
+    public AuthenticateResponse authentication(AuthenticationRequest req) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         req.getEmail(),

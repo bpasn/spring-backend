@@ -1,4 +1,4 @@
-package com.firstApp.firstApp.response;
+package com.firstApp.firstApp.controllers.auth;
 
 import lombok.Builder;
 import lombok.Data;

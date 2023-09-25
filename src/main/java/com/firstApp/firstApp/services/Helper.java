@@ -19,18 +19,31 @@ public class Helper {
     @Value("${mount_path}")
     private String BASE_PATH;
     public String saveFile(MultipartFile cImage) throws IOException {        
-        Path source = Paths.get(BASE_PATH);
-        Path newFolder = Paths.get(source.toAbsolutePath() + "/static/categories");
-        if (!Files.exists(newFolder)) {
-            Files.createDirectories(newFolder);
+        // Define the base path and the subfolder for categories
+        Path basePath = Paths.get(BASE_PATH);
+        Path categoriesFolder = basePath.resolve("static/categories");
+
+        // create The Categories Folders if it doesn't exist
+        if (!Files.exists(categoriesFolder)) {
+            Files.createDirectories(categoriesFolder);
         }
+
+        // Get the original file name and its byte data
         String fileName = cImage.getOriginalFilename();
         byte[] getByte = cImage.getBytes();
-        File file = new File(newFolder.toString(), fileName);
-        try (OutputStream os = new FileOutputStream(file)) {
+
+
+        // Create the target file
+        Path targetFilePath = categoriesFolder.resolve(fileName);
+
+        // Write the file using try-with-resources
+        try (OutputStream os = new FileOutputStream(String.valueOf(targetFilePath))) {
             os.write(getByte);
         }
-        return String.format("%s/static/categories/%s", BASE_PATH, fileName);
+
+        // Return the file path as string
+        return targetFilePath.toString();
+//        return String.format("%s/static/categories/%s", BASE_PATH, fileName);
     }
 
 }

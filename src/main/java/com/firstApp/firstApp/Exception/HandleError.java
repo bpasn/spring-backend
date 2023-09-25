@@ -70,8 +70,8 @@ public class HandleError {
         response.setSuccess(false);
         return new ResponseEntity<>(response,HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    
-    
+
+
     @Data
     public static class ExceptionResponseValidate {
         private List<Map<String, String>> errors;

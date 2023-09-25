@@ -30,8 +30,8 @@ public class SecurityConfig {
         http
                 .cors(c -> c.disable())
                 .csrf(c -> c.disable())
-                .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/api/v1/auth/**","/actuator/**")
+                .authorizeHttpRequests(authorize ->
+                        authorize.requestMatchers("/api/v1/auth/**","/actuator/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())
