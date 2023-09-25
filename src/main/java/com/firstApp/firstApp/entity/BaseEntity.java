@@ -1,5 +1,6 @@
 package com.firstApp.firstApp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -23,10 +24,12 @@ public abstract class BaseEntity {
 
     @CreationTimestamp
     @Column(nullable = false)
+    @JsonIgnore
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
     @UpdateTimestamp
+    @JsonIgnore
     private LocalDateTime updatedAt;
 
 

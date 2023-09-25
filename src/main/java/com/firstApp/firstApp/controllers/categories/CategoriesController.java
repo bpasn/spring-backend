@@ -1,6 +1,7 @@
 package com.firstApp.firstApp.controllers.categories;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -10,13 +11,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.firstApp.firstApp.Exception.BaseException;
 import com.firstApp.firstApp.services.CategoryService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/v1/category")
@@ -35,7 +38,12 @@ public class CategoriesController {
         return ResponseEntity.status(201).body("Create Successfully.");
     }
 
-    @PutMapping("update/{id}")
+    @GetMapping(value="get")
+    public ResponseEntity<List<CategoriesResponse>> getMethodName() {
+        return null;
+    }
+    
+    @PutMapping("/update")
     ResponseEntity<String> update(@Valid @ModelAttribute ReqCreateCategory request) {
         return ResponseEntity.ok("Update Successfully.");
     }

@@ -6,9 +6,8 @@ import com.firstApp.firstApp.controllers.auth.AuthenticationRequest;
 import com.firstApp.firstApp.entity.UserEntity;
 import com.firstApp.firstApp.enums.Role;
 import com.firstApp.firstApp.interfaces.IUserService;
+import com.firstApp.firstApp.mapper.UserMapper;
 import com.firstApp.firstApp.repository.UserRepository;
-
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,13 +20,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService implements IUserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserMapper mapper;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
-            AuthenticationManager authenticationManager, JwtService jwtService) {
+                       UserMapper mapper, AuthenticationManager authenticationManager, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.mapper = mapper;
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
     }
@@ -47,7 +48,7 @@ public class UserService implements IUserService {
         userEntity.setLastName(lastName);
         userEntity.setPassword(passwordEncoder.encode(password));
         userEntity.setRoles(Role.USER);
-
+mapper.userEntityToModel(userEntity);
         UserEntity user = userRepository.save(userEntity);
         String token = jwtService.generateToken(user);
         return AuthenticateResponse.builder().token(token).build();

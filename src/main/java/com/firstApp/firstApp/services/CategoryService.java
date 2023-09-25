@@ -1,11 +1,14 @@
 package com.firstApp.firstApp.services;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.firstApp.firstApp.Exception.BaseException;
+import com.firstApp.firstApp.controllers.categories.CategoriesResponse;
+import com.firstApp.firstApp.controllers.categories.CategoryMapper;
 import com.firstApp.firstApp.controllers.categories.ReqCreateCategory;
 import com.firstApp.firstApp.entity.CategoriesEntity;
 import com.firstApp.firstApp.interfaces.ICategory;
@@ -16,16 +19,18 @@ public class CategoryService implements ICategory {
 
     private final CategoriesRepository repository;
     private final Helper helper;
+    private final CategoryMapper categoryMapper;
 
-    public CategoryService(CategoriesRepository repository, Helper helper) {
+    public CategoryService(CategoriesRepository repository, Helper helper,CategoryMapper mapper) {
         this.repository = repository;
         this.helper = helper;
+        this.categoryMapper = mapper;
     }
 
     @Override
     public String create(ReqCreateCategory request) throws IOException {
         if (repository.existsBycName(request.getCName())) {
-            throw new BaseException("Categories is already.", HttpStatus.ACCEPTED);
+            throw new BaseException("Categories is already.", HttpStatus.BAD_REQUEST);
         }
         String pathImage = helper.saveFile(request.getCImage());
         CategoriesEntity categoriesEntity = new CategoriesEntity();
@@ -46,6 +51,13 @@ public class CategoryService implements ICategory {
     public String delete(Integer id) {
         repository.deleteById(id);
         return "Delete successfully.";
+    }
+
+    @Override
+    public List<CategoriesResponse> get() {
+        // TODO Auto-generated method stub
+        List<CategoriesEntity> categories = repository.findAll();
+        return null;
     }
 
 }
