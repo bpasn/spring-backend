@@ -15,7 +15,8 @@ src/main/resources/static/
 .sts4-cache
 
 ### DATABASE ###
-database/
+database/*
+./database
 
 ### IntelliJ IDEA ###
 .idea
