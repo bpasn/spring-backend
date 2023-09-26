@@ -26,9 +26,11 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @Column(unique = true, nullable = false, length = 50)
     private String email;
 
-    @Column(nullable = false, length = 256)
+    @Column(nullable = false, length = 255)
     private String password;
 
+    @Column(length = 15)
+    private String phone;
     @Enumerated(EnumType.STRING)
     private Role roles;
 

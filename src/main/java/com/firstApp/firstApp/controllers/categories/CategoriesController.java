@@ -3,7 +3,6 @@ package com.firstApp.firstApp.controllers.categories;
 import java.io.IOException;
 import java.util.List;
 
-import com.firstApp.firstApp.entity.CategoriesEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,8 +18,6 @@ import com.firstApp.firstApp.services.CategoryService;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 @RequestMapping("/api/v1/category")
@@ -39,18 +36,19 @@ public class CategoriesController {
         return ResponseEntity.status(201).body("Create Successfully.");
     }
 
-    @GetMapping(value="/get")
-    public ResponseEntity<List<CategoriesResponse>>get() {
+    @GetMapping(value = "/get")
+    public ResponseEntity<List<CategoriesResponse>> get() {
         return ResponseEntity.ok(service.get());
     }
 
-    @GetMapping(value="/getById/{id}")
-    public ResponseEntity<CategoriesResponse>get(@PathVariable String id) {
+    @GetMapping(value = "/get/{id}")
+    public ResponseEntity<CategoriesResponse> get(@PathVariable String id) {
         return ResponseEntity.ok(service.getById(Integer.parseInt(id)));
     }
-    
+
     @PutMapping("/update")
-    ResponseEntity<String> update(@Valid @ModelAttribute ReqCreateCategory request) {
+    ResponseEntity<String> update(@Valid @ModelAttribute ReqUpdateCategory request) throws IOException {
+        service.update(request);
         return ResponseEntity.ok("Update Successfully.");
     }
 

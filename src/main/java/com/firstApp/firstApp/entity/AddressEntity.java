@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @Entity(name = "address")
 public class AddressEntity extends BaseEntity{
+    
     private String address1;
-    private String address2;
     private String building;
     private String lane;
     private String village;
