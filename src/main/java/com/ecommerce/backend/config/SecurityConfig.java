@@ -18,10 +18,10 @@ public class SecurityConfig {
     private final AuthException authException;
 
     public SecurityConfig(JwtAuthenticationFilter jwtAuthFilter, AuthenticationProvider authenticationProvider,
-            AuthException autheException) {
+            AuthException authException) {
         this.jwtAuthFilter = jwtAuthFilter;
         this.authenticationProvider = authenticationProvider;
-        this.authException = autheException;
+        this.authException = authException;
     }
 
     @Bean
