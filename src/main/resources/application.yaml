@@ -1,7 +1,9 @@
+server:
+  port: ${SERVER_PORT:8080}
 spring:
   
   datasource:
-    url: jdbc:mysql://localhost:3306/backend?characterEncoding=utf-8
+    url: ${MYSQL_DB_URL:jdbc:mysql://localhost:3306/backend?characterEncoding=utf-8}
     username: root
     password: 1234
   jpa:
@@ -19,7 +21,11 @@ spring:
 
 backend:
   jwt:
-    expired: 360000
-    secret: private-key
+#    Y M W D H MM S MS
+#    * * * * * *  * *
+#    15 * 60 *  1000 << output 900000 // 15min
+    expired: 900000
+    private-key: ${PRIVATE_KEY:d45c48a62cfcf0c885b1865088f14e6dc1d075383bfaf879079fee4c1aef0ef6}
+    public-key: ${PUBLIC_KEY:public-key}
 
 mount_path: src/main/resources

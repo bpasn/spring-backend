@@ -7,6 +7,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.log4j.Log4j2;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,8 @@ import java.util.function.Function;
 @Service
 @Log4j2
 public class JwtService {
-    private static final String SECRET_KEY = "d45c48a62cfcf0c885b1865088f14e6dc1d075383bfaf879079fee4c1aef0ef6";
+    @Value("${backend.jwt.private-key}")
+    private String SECRET_KEY;
     public String extractUsername(String token) {
         return extractClaim(token,Claims::getSubject);
     }
