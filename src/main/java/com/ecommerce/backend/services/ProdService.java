@@ -10,7 +10,7 @@ import com.ecommerce.backend.repository.ProductRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.ecommerce.backend.controllers.product.ReqCreate;
+import com.ecommerce.backend.controllers.product.ReqCreateProduct;
 import com.ecommerce.backend.interfaces.IProduct;
 
 import jakarta.transaction.Transactional;
@@ -30,10 +30,14 @@ public class ProdService  implements IProduct{
 
     @Override
     @Transactional(rollbackOn = Exception.class)
-    public String create(ReqCreate product) throws IOException {
-        CategoryEntity category = categoriesRepository.getByName(product.getCategoryName()).orElseThrow(() -> new BaseException("Category Name not found.",HttpStatus.BAD_REQUEST));
+    public String create(ReqCreateProduct product) throws IOException {
+        CategoryEntity category = categoriesRepository.getByName(
+                product.getCategoryName()
+        ).orElseThrow(
+                () -> new BaseException("Category Name not found.",HttpStatus.BAD_REQUEST)
+        );
         ProductEntity entity = new ProductEntity();
-        String image = helper.saveFileWithBase64(product.getImageBase64(), "static/products", product.getOriginalFile());
+        String image = helper.saveFileImageWithBase64(product.getImageBase64(), "static/products", product.getOriginalFile());
 
         entity.setCategory(category);
         entity.setName(product.getName());

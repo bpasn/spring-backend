@@ -14,15 +14,15 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/product")
-public class ProdController {
+public class ProductController {
     private final ProdService service;
 
-    public ProdController(ProdService service) {
+    public ProductController(ProdService service) {
         this.service = service;
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@Valid @RequestBody ReqCreate product) throws IOException {
+    public ResponseEntity<String> create(@Valid @RequestBody ReqCreateProduct product) throws IOException {
         return ResponseEntity.status(201).body(service.create(product));
     }
 

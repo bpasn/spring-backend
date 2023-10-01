@@ -1,6 +1,8 @@
 package com.ecommerce.backend.services;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import com.ecommerce.backend.Exception.BaseException;
@@ -8,6 +10,7 @@ import com.ecommerce.backend.controllers.categories.CategoriesResponse;
 import com.ecommerce.backend.controllers.categories.ReqCreateCategory;
 import com.ecommerce.backend.interfaces.ICategory;
 import com.ecommerce.backend.repository.CategoriesRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,9 @@ public class CategoryService implements ICategory {
     private final Helper helper;
     private final CategoryMapper mapper;
 
+    @Value("${mount_path}")
+    private String BASE_PATH;
+
     public CategoryService(CategoriesRepository repository, Helper helper, CategoryMapper mapper) {
         this.repository = repository;
         this.helper = helper;
@@ -33,13 +39,20 @@ public class CategoryService implements ICategory {
         if (repository.existsByName(request.getCName())) {
             throw new BaseException("Categories is already.", HttpStatus.BAD_REQUEST);
         }
-        String pathImage = helper.saveFile(request.getCImage());
+        // Set the file path for writing the file;
+        Path output = Paths.get(BASE_PATH)
+                .resolve("static/categories")
+                .resolve(request.getCImage().getOriginalFilename());
+        //Write file and save file path
+        helper.saveFileImage(request.getCImage(),output);
+
+        //new Object create data to table category;
         CategoryEntity categoryEntity = new CategoryEntity();
         categoryEntity.setName(request.getCName());
         categoryEntity.setDescription(request.getCDescription());
-        categoryEntity.setImage(pathImage);
+        categoryEntity.setImage(output.toString());
         repository.save(categoryEntity);
-        return pathImage;
+        return output.toString();
     }
 
     @Override
@@ -69,8 +82,11 @@ public class CategoryService implements ICategory {
         request.getCImage().ifPresent((c -> {
             try {
                 helper.deleteFile(existCategory.getImage());
-                String savePath = helper.saveFile(c);
-                existCategory.setImage(savePath);
+                Path output = Paths.get(BASE_PATH)
+                        .resolve("static/categories")
+                        .resolve(c.getOriginalFilename());
+                helper.saveFileImage(c,output);
+                existCategory.setImage(output.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }

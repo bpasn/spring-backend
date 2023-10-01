@@ -7,11 +7,12 @@ import com.google.zxing.WriterException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 public interface IHelper {
-    String saveFile(MultipartFile file) throws IOException;
+    String saveFileImage(MultipartFile file, Path outputPath) throws IOException;
 
-    String saveFileWithBase64(String base64, String path, String filename) throws IOException;
+    String saveFileImageWithBase64(String base64, String path, String filename) throws IOException;
 
     void deleteFile(String pathFile) throws IOException;
 

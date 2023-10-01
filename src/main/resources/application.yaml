@@ -1,3 +1,4 @@
+
 server:
   port: ${SERVER_PORT:8080}
 spring:
@@ -25,7 +26,7 @@ backend:
 #    * * * * * *  * *
 #    15 * 60 *  1000 << output 900000 // 15min
     expired: 900000
-    private-key: ${PRIVATE_KEY:d45c48a62cfcf0c885b1865088f14e6dc1d075383bfaf879079fee4c1aef0ef6}
+    secret-key: ${PRIVATE_KEY:d45c48a62cfcf0c885b1865088f14e6dc1d075383bfaf879079fee4c1aef0ef6}
     public-key: ${PUBLIC_KEY:public-key}
 
 mount_path: src/main/resources

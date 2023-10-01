@@ -21,7 +21,7 @@ import java.util.function.Function;
 @Service
 @Log4j2
 public class JwtService {
-    @Value("${backend.jwt.private-key}")
+    @Value("${backend.jwt.secret-key}")
     private String SECRET_KEY;
     public String extractUsername(String token) {
         return extractClaim(token,Claims::getSubject);

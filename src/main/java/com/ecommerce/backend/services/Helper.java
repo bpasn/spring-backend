@@ -34,17 +34,17 @@ public class Helper implements IHelper {
 
     private final String[] supportType = {"image/png", "image/jpeg"};
 
-    public String saveFile(MultipartFile cImage) throws IOException {
+    public String saveFileImage(MultipartFile cImage, Path output) throws IOException {
         // Define the base path and the subfolder for categories
         if (!Arrays.asList(supportType).contains(cImage.getContentType())) {
             throw new IOException(String.format("%s File Type  Doesn't Support.", cImage.getContentType()));
         }
-        Path basePath = Paths.get(BASE_PATH);
-        Path categoriesFolder = basePath.resolve("static/categories");
 
+        // Get Only folder, replace filename
+        Path directory = Paths.get(output.toString().replace(output.getFileName().toString(),""));
         // create The Categories Folders if it doesn't exist
-        if (!Files.exists(categoriesFolder)) {
-            Files.createDirectories(categoriesFolder);
+        if (!Files.exists(directory)) {
+            Files.createDirectories(directory);
         }
 
         log.info(cImage.getContentType());
@@ -52,16 +52,13 @@ public class Helper implements IHelper {
         String fileName = cImage.getOriginalFilename();
         byte[] getByte = cImage.getBytes();
 
-        // Create the target file
-        Path targetFilePath = categoriesFolder.resolve(fileName);
-
         // Write the file using try-with-resources
-        try (OutputStream os = Files.newOutputStream(targetFilePath)) {
+        try (OutputStream os = Files.newOutputStream(output)) {
             os.write(getByte);
         }
 
         // Return the file path as string
-        return targetFilePath.toString();
+        return output.toString();
     }
 
     @Override
@@ -100,7 +97,7 @@ public class Helper implements IHelper {
     }
 
     @Override
-    public String saveFileWithBase64(String base64, String path, String filename) throws IOException {
+    public String saveFileImageWithBase64(String base64, String path, String filename) throws IOException {
         Path setPath = Paths.get(BASE_PATH).resolve(path);
         if (!Files.exists(setPath)) {
             Files.createDirectories(setPath);

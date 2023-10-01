@@ -13,7 +13,7 @@ import lombok.ToString;
 @Data
 @Setter
 @Getter
-public class ReqCreate {
+public class ReqCreateProduct {
     @NotNull(message = "Field Name is required.")
     private String name;
 
@@ -30,6 +30,7 @@ public class ReqCreate {
 
     @NotNull(message = "Field Original File is required.")
     private String originalFile;
+
     @NotNull(message = "Field Image is required.")
     private String imageBase64;
 }

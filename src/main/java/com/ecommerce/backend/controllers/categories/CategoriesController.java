@@ -3,6 +3,9 @@ package com.ecommerce.backend.controllers.categories;
 import java.io.IOException;
 import java.util.List;
 
+import com.ecommerce.backend.interfaces.ICategory;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,9 +24,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/v1/category")
+@OpenAPIDefinition
+@SecurityRequirement(name = "bearerAuth")
 public class CategoriesController {
 
-    private final CategoryService service;
+    private final ICategory service;
 
     public CategoriesController(CategoryService service) {
         this.service = service;

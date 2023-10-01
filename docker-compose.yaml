@@ -20,26 +20,26 @@ services:
     networks:
       - backend
 
-  spring-boot:
-    image: spring-backend:0.1
-    restart: always
-    environment:
-      MYSQL_DB_URL: jdbc:mysql://database:3306/backend?characterEncoding=utf-8
-      PRIVATE_KEY: d45c48a62cfcf0c885b1865088f14e6dc1d075383bfaf879079fee4c1aef0ef6
-      PUBLIC_KEY: public-key
-    depends_on:
-      - database
-    networks:
-      - backend
-    ports:
-      - "9000:80"
-
-
-  nginx:
-    image: nginx
-    networks:
-      - backend
-    volumes:
-      - ./default.conf:/etc/nginx/conf.d/default.conf
-    ports:
-      - "80:80"
+#  spring-boot:
+#    image: spring-backend:0.1
+#    restart: always
+#    environment:
+#      MYSQL_DB_URL: jdbc:mysql://database:3306/backend?characterEncoding=utf-8
+#      PRIVATE_KEY: d45c48a62cfcf0c885b1865088f14e6dc1d075383bfaf879079fee4c1aef0ef6
+#      PUBLIC_KEY: public-key
+#    depends_on:
+#      - database
+#    networks:
+#      - backend
+#    ports:
+#      - "9000:80"
+#
+#
+#  nginx:
+#    image: nginx
+#    networks:
+#      - backend
+#    volumes:
+#      - ./default.conf:/etc/nginx/conf.d/default.conf
+#    ports:
+#      - "80:80"

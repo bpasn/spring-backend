@@ -41,14 +41,13 @@ public class JUnitTestSaveFile {
         Files.createDirectories(categoriesFolder);
 
         // Mock the behavior of the file service
-        String expectedFilePath = categoriesFolder.resolve("chair.jpg").toString();
-//        when(helper.saveFile(multipartFile)).thenReturn(expectedFilePath);
+        Path expectedFilePath = categoriesFolder.resolve("chair.jpg");
 
         // Call the saveFile method
-        String actualFilePath = helper.saveFile(multipartFile);
+        String actualFilePath = helper.saveFileImage(multipartFile,expectedFilePath);
 
         // Verify that the method returned the expected file path
-        Assertions.assertEquals(expectedFilePath, actualFilePath);
+        Assertions.assertEquals(expectedFilePath.toString(), actualFilePath);
 
         // CLean up: Delete the temporary directory;
         // Files.deleteIfExists(categoriesFolder);
@@ -59,7 +58,8 @@ public class JUnitTestSaveFile {
         IOException ex = Assertions.assertThrows(IOException.class, () -> {
             byte[] fileContent = "Hello, World!".getBytes();
             MockMultipartFile multipartFile = new MockMultipartFile("file", "test.txt", "text/plain", fileContent);
-            helper.saveFile(multipartFile);
+            Path output = Paths.get(BASE_PATH).resolve("static/categories/test.txt");
+            helper.saveFileImage(multipartFile,output);
         });
     }
     @Test
@@ -72,7 +72,7 @@ public class JUnitTestSaveFile {
         // Mock the behavior of the file service
         String expectedFilePath = productPath.resolve(fileName).toString();
         String base64Encode = Base64.getEncoder().encodeToString(content.getBytes());
-        String actualFilePath = helper.saveFileWithBase64(base64Encode, pathFile, fileName);
+        String actualFilePath = helper.saveFileImageWithBase64(base64Encode, pathFile, fileName);
 
         Assertions.assertEquals(expectedFilePath, actualFilePath);
         Files.deleteIfExists(Paths.get(actualFilePath));
