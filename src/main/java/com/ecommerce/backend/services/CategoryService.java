@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 
 import com.ecommerce.backend.Exception.BaseException;
 import com.ecommerce.backend.controllers.categories.CategoriesResponse;
@@ -42,7 +43,7 @@ public class CategoryService implements ICategory {
         // Set the file path for writing the file;
         Path output = Paths.get(BASE_PATH)
                 .resolve("static/categories")
-                .resolve(request.getCImage().getOriginalFilename());
+                .resolve(Objects.requireNonNull(request.getCImage().getOriginalFilename()));
         //Write file and save file path
         helper.saveFileImage(request.getCImage(),output);
 
@@ -77,14 +78,14 @@ public class CategoryService implements ICategory {
     public String update(ReqUpdateCategory request) throws IOException {
         CategoryEntity existCategory = repository.getByName(request.getCName()).orElse(null);
 
-        existCategory.setDescription(request.getCDescription());
+        Objects.requireNonNull(existCategory).setDescription(request.getCDescription());
         existCategory.setName(request.getCName());
         request.getCImage().ifPresent((c -> {
             try {
                 helper.deleteFile(existCategory.getImage());
                 Path output = Paths.get(BASE_PATH)
                         .resolve("static/categories")
-                        .resolve(c.getOriginalFilename());
+                        .resolve(Objects.requireNonNull(c.getOriginalFilename()));
                 helper.saveFileImage(c,output);
                 existCategory.setImage(output.toString());
             } catch (IOException e) {

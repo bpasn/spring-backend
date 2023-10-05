@@ -12,11 +12,9 @@ import com.ecommerce.backend.interfaces.IHelper;
 import com.google.zxing.*;
 import com.google.zxing.Reader;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
-import com.google.zxing.oned.UPCAWriter;
 import lombok.extern.log4j.Log4j2;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -47,9 +45,7 @@ public class Helper implements IHelper {
             Files.createDirectories(directory);
         }
 
-        log.info(cImage.getContentType());
         // Get the original file name and its byte data
-        String fileName = cImage.getOriginalFilename();
         byte[] getByte = cImage.getBytes();
 
         // Write the file using try-with-resources
