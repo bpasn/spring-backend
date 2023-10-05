@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
 
@@ -21,7 +22,8 @@ import java.util.Base64;
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class JUnitTestSaveFile {
-    private static final String BASE_PATH = "src/main/resources";
+    @Value("${APPLICATION.MOUNT_PATH")
+    private  String BASE_PATH;
 
     @Autowired
     private Helper helper;
@@ -37,7 +39,7 @@ public class JUnitTestSaveFile {
 
         // Create a temporary directory for testing
         Path basePath = Paths.get(BASE_PATH);
-        Path categoriesFolder = basePath.resolve("static/categories");
+        Path categoriesFolder = basePath.resolve("images/categories");
         Files.createDirectories(categoriesFolder);
 
         // Mock the behavior of the file service
@@ -58,7 +60,7 @@ public class JUnitTestSaveFile {
         IOException ex = Assertions.assertThrows(IOException.class, () -> {
             byte[] fileContent = "Hello, World!".getBytes();
             MockMultipartFile multipartFile = new MockMultipartFile("file", "test.txt", "text/plain", fileContent);
-            Path output = Paths.get(BASE_PATH).resolve("static/categories/test.txt");
+            Path output = Paths.get(BASE_PATH).resolve("images/categories/test.txt");
             helper.saveFileImage(multipartFile,output);
         });
     }
@@ -66,7 +68,7 @@ public class JUnitTestSaveFile {
     public void createFileWithBase64() throws IOException {
         String content = "Hello World!!";
         String fileName = "test.txt";
-        String pathFile = "static/products";
+        String pathFile = "images/products";
         Path productPath = Paths.get(BASE_PATH).resolve(pathFile);
 
         // Mock the behavior of the file service

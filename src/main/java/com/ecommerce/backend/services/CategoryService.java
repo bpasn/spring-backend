@@ -25,7 +25,7 @@ public class CategoryService implements ICategory {
     private final Helper helper;
     private final CategoryMapper mapper;
 
-    @Value("${mount_path}")
+    @Value("${APPLICATION.MOUNT_PATH}")
     private String BASE_PATH;
 
     public CategoryService(CategoriesRepository repository, Helper helper, CategoryMapper mapper) {

@@ -2,10 +2,12 @@ package com.ecommerce.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "products")
 public class ProductEntity extends BaseEntity{

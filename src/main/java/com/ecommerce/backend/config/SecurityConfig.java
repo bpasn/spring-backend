@@ -3,6 +3,7 @@ package com.ecommerce.backend.config;
 import com.ecommerce.backend.component.AuthException;
 import com.ecommerce.backend.component.JwtAuthenticationFilter;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -24,8 +25,9 @@ import java.util.List;
 @EnableWebSecurity
 @Log4j2
 public class SecurityConfig {
-
     private final String[] PUBLIC_ROUTE = {
+            "/dir-tree/opt/storage/**",
+            "/storage-path/**",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",
@@ -37,7 +39,7 @@ public class SecurityConfig {
             "/webjars/**",
             "/swagger-ui.html",
             "/api/v1/auth/**",
-            "/actuator/**"
+            "/actuator/**",
     };
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthFilter;

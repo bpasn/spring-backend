@@ -29,7 +29,7 @@ import javax.imageio.ImageIO;
 @Log4j2
 public class Helper implements IHelper {
 
-    @Value("${mount_path}")
+    @Value("${APPLICATION.MOUNT_PATH}")
     private String BASE_PATH;
 
     private final String[] supportType = {"image/png", "image/jpeg"};

@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 @SpringBootTest
 @Log4j2
 public class JUnitTestQRCode {
-    @Value("${mount_path}")
+    @Value("${APPLICATION.MOUNT_PATH}")
     private String BASE_PATH;
 
     @Autowired
@@ -26,7 +26,7 @@ public class JUnitTestQRCode {
     @Test
     void generateQRCode() throws IOException, WriterException {
         String data = "012345678905";
-        String path = "static/qrcode/qrcode.png";
+        String path = "images/qrcode/qrcode.png";
         String expected = Paths.get(BASE_PATH).resolve(path).toString();
         String actual = helper.generateQRCode(data, path);
 
@@ -38,7 +38,7 @@ public class JUnitTestQRCode {
     void readQRCode() throws ChecksumException, NotFoundException, IOException, FormatException {
 
         String expected = "012345678905";
-        String path = "static/qrcode/qrcode.png";
+        String path = "images/qrcode/qrcode.png";
         String actual = helper.readQRCode(path);
 
         Assertions.assertEquals(expected,actual);
