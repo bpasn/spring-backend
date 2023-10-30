@@ -37,8 +37,8 @@ public class CategoriesController {
     @PostMapping(path = "create", consumes = { "multipart/form-data" })
     ResponseEntity<String> create(@Valid @ModelAttribute ReqCreateCategory request)
             throws BaseException, MethodArgumentNotValidException, IOException {
-        service.create(request);
-        return ResponseEntity.status(201).body("Create Successfully.");
+
+        return ResponseEntity.status(201).body(service.create(request));
     }
 
     @GetMapping(value = "/get")

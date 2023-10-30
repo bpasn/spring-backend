@@ -10,9 +10,6 @@ import lombok.ToString;
 @Data
 @ToString
 public class ReqUpdateCategory {
+    private String id;
     private String cName;
-
-    private Optional<MultipartFile> cImage;
-
-    private String cDescription;
 }

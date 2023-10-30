@@ -11,9 +11,4 @@ public class ReqCreateCategory {
     @NotNull(message = "Categories is required")
     @Size(min = 2)
     private String cName;
-
-    @NotNull(message = "Picture of Categories is required")
-    private MultipartFile cImage;
-
-    private String cDescription = null;
 }

@@ -44,7 +44,7 @@ public class ProdService  implements IProduct{
         entity.setDescription(product.getDescription());
         entity.setPrice(product.getPrice());
         entity.setStockQuantity(product.getStockQuantity());
-        entity.setImage(image);
+//        entity.setImage(image);
 
         productRepository.save(entity);
        return "Create Product Successfully";

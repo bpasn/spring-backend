@@ -40,20 +40,11 @@ public class CategoryService implements ICategory {
         if (repository.existsByName(request.getCName())) {
             throw new BaseException("Categories is already.", HttpStatus.BAD_REQUEST);
         }
-        // Set the file path for writing the file;
-        Path output = Paths.get(BASE_PATH)
-                .resolve("static/categories")
-                .resolve(Objects.requireNonNull(request.getCImage().getOriginalFilename()));
-        //Write file and save file path
-        helper.saveFileImage(request.getCImage(),output);
-
         //new Object create data to table category;
         CategoryEntity categoryEntity = new CategoryEntity();
         categoryEntity.setName(request.getCName());
-        categoryEntity.setDescription(request.getCDescription());
-        categoryEntity.setImage(output.toString());
         repository.save(categoryEntity);
-        return output.toString();
+        return "Create Category Successfully.";
     }
 
     @Override
@@ -78,20 +69,19 @@ public class CategoryService implements ICategory {
     public String update(ReqUpdateCategory request) throws IOException {
         CategoryEntity existCategory = repository.getByName(request.getCName()).orElse(null);
 
-        Objects.requireNonNull(existCategory).setDescription(request.getCDescription());
         existCategory.setName(request.getCName());
-        request.getCImage().ifPresent((c -> {
-            try {
-                helper.deleteFile(existCategory.getImage());
-                Path output = Paths.get(BASE_PATH)
-                        .resolve("static/categories")
-                        .resolve(Objects.requireNonNull(c.getOriginalFilename()));
-                helper.saveFileImage(c,output);
-                existCategory.setImage(output.toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }));
+//        request.getCImage().ifPresent((c -> {
+//            try {
+//                helper.deleteFile(existCategory.getImage());
+//                Path output = Paths.get(BASE_PATH)
+//                        .resolve("static/categories")
+//                        .resolve(Objects.requireNonNull(c.getOriginalFilename()));
+//                helper.saveFileImage(c,output);
+//                existCategory.setImage(output.toString());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }));
 
         repository.save(existCategory);
         return "Update category success.";
