@@ -1,13 +1,13 @@
 package com.ecommerce.backend.repository;
 
-import com.ecommerce.backend.entity.UserEntity;
+import com.ecommerce.backend.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity,Integer> {
-    Optional<UserEntity> findByEmail(String email);
+public interface UserRepository extends JpaRepository<Users,Integer> {
+    Optional<Users> findByEmail(String email);
     boolean existsByEmail(String email);
 }

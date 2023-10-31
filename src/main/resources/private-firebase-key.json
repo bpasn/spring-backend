@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "famous-archway-274409",
+  "private_key_id": "30ff3f810a7793a0ce30b753319aed23ce035da6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC4T4sdkKng4Akx\ngH/OxfeLHxOMXG5jioZs08D+c/ATNFho4ceLlWhGsLYs56Fj3+wroZoKm3ugEUUw\n67xFkEAE3ErNUXwm/SLySgMrXLhixwbXIP4FQvZ86+RPK1ixQYylcWlCumHFZt3H\nz9gs3LjN6/3ZivQuhX4wft9nuBTDj3ihdgObpLDDuYCLz0/eSMJnuI2uKOh5Qybq\nW622ln43FNMmwPESvrU/n0LGzy69pRpgON40cDrmvlOa7wxK/aoFuZ58j4KpiWVt\ntU/f7ixRCjUMcjpieKj80zMQUXlpgpBirmhPgUUa6f9oQd0kADnFay0tBiR6rpTI\nxblozNzLAgMBAAECggEAGMEGLChbyIoOcgmSINFR1+uKkpVvdgsK1t7x0rr7iXjE\nTwHT7RlZ8fSV4x4Q/Pr8GzgPGlGbnvny0wk2NhmTn5N+sGi7RflFkkkCd/ZyBUI5\n1vblZwuBU3HTLhbiSJxHKYk72+xwaTTRoJ53qD7Uy0NgyrDw7rabJiREGQgOMd1+\nP/+eTBX+zvQnC0D30ELOA8YdPK8c1ZQPHqvR1u1w0HBp2yDrvjXYgL/Ga9hNmQQL\nAlYeYlFL8y0T7pHWZtLN5/fW7ozzn/33EhvSB1T4VwX59GeyWvFcd2F7J4q2i8s6\n/U5wTcsyBGUqnPly9vG86/BJsd2qjamGkELR6m9GIQKBgQD28Sf+MN8tsTgOY3CL\n8YC1EKy7+yI+9qG7dotDtQamKUnNm8dFCfDIjAtB+vmYxUCtsP8yN+5hVxRfqNpZ\nc6m+uCUHzYLqpSU0iHsFQMgN6pzOF5H6RG7UUzXmuQmqIbA6DTZ2c3NpsMeZqXWe\nmFdk5dV6/m+VH/4F6PUxAxakcwKBgQC/EkO3etFLUbT7vmL7CHOkNmjq69i5FFEg\nc6ui/VYl8fPn1QBWBz7s6rbA/w9OJuEjJfkGiswBzNPNVPljp4lL9PBaPDpPKaGW\nDGhMgfo2BEmogF/ZqfEvNaC27ymeHQQbVdWMo7QM3qt4tER7B4nF/dr8SMhXEQvC\niMEOCEIoSQKBgHlWIXqK9P50l8CqJ8D7l2xglx9+1GLvuKRuKRvJtUyr+PGoW4+W\nxNMlzNpMwZvJQHCYCazZQq5dpUsjorZVWNC3lqpw1qUJJHDdpuT74dDEuOujNT0t\npu95O4D05sTL7NV5bItjSxBhppHgbETTQg33yJ+4qYcywxSQVPoSNGv1AoGBAJjV\nvUDYhu1ecAwmX/o46ndh5k5zVKnGrJXusE3xoqU7gkPgxyIJLbZIkOKTouR6iP+a\ncjVfdIvEEW9fFxU1f8c4J8GmB2YnAM+LISqBlWj7yQd1mDX9j6SZmvJ5H6sPvqc2\n41hZ4b2hpzsnxtc6UmQDCNVgSpAKXIPA69uTk4exAoGBAOdYdvr96ThjS/bGqYVD\njfjEhcQWh4NGLskCedA3/n+ZW+IiaBnAUvtUT+2N5z5M0yJH+N0l/3+LgsFFr69+\ng8JuQLhr0e3s+YksOdOioBf/rQT3VRqrN6tzXOSTqsSPKj44++0TdIEfU9Bvaf4j\nO9SLQtIfxXNDu8iPRjT1yafD\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-329kp@famous-archway-274409.iam.gserviceaccount.com",
+  "client_id": "110305583707967188610",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-329kp%40famous-archway-274409.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

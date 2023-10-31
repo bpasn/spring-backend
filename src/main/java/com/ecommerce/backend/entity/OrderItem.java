@@ -13,15 +13,15 @@ import java.util.Objects;
 @Data
 @Entity
 @Table(name = "order_item")
-public class OrderItemEntity extends BaseEntity {
+public class OrderItem extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "orderId")
-    private OrdersEntity orders;
+    private Orders orders;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private ProductEntity products;
+    private Product products;
 
     private Integer quantity;
 
@@ -31,7 +31,7 @@ public class OrderItemEntity extends BaseEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof OrderItemEntity that)) return false;
+        if (!(o instanceof OrderItem that)) return false;
         return Objects.equals(getOrders(), that.getOrders()) && Objects.equals(getProducts(), that.getProducts()) && Objects.equals(getQuantity(), that.getQuantity()) && Objects.equals(getUnitPrice(), that.getUnitPrice());
     }
 

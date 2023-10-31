@@ -3,7 +3,7 @@ package com.ecommerce.backend.services;
 import com.ecommerce.backend.Exception.BaseException;
 import com.ecommerce.backend.controllers.auth.AuthenticateResponse;
 import com.ecommerce.backend.controllers.auth.AuthenticationRequest;
-import com.ecommerce.backend.entity.UserEntity;
+import com.ecommerce.backend.entity.Users;
 import com.ecommerce.backend.enums.Role;
 import com.ecommerce.backend.interfaces.IUserService;
 import com.ecommerce.backend.repository.UserRepository;
@@ -38,13 +38,13 @@ public class UserService implements IUserService {
             throw new BaseException("Email already exists",HttpStatus.CONFLICT);
         }
             
-        UserEntity userEntity = new UserEntity();
-        userEntity.setEmail(email);
-        userEntity.setFirstName(firstName);
-        userEntity.setLastName(lastName);
-        userEntity.setPassword(passwordEncoder.encode(password));
-        userEntity.setRoles(Role.USER);
-        UserEntity user = userRepository.save(userEntity);
+        Users users = new Users();
+        users.setEmail(email);
+        users.setFirstName(firstName);
+        users.setLastName(lastName);
+        users.setPassword(passwordEncoder.encode(password));
+        users.setRoles(Role.USER);
+        Users user = userRepository.save(users);
         String token = jwtService.generateToken(user);
         return AuthenticateResponse.builder().token(token).build();
     }
@@ -55,7 +55,7 @@ public class UserService implements IUserService {
                 new UsernamePasswordAuthenticationToken(
                         req.getEmail(),
                         req.getPassword()));
-        UserEntity user = userRepository.findByEmail(req.getEmail()).orElseThrow();
+        Users user = userRepository.findByEmail(req.getEmail()).orElseThrow();
         String jwtToken = jwtService.generateToken(user);
 
         return AuthenticateResponse.builder().token(jwtToken).build();

@@ -3,8 +3,8 @@ package com.ecommerce.backend.services;
 import java.io.IOException;
 
 import com.ecommerce.backend.Exception.BaseException;
-import com.ecommerce.backend.entity.CategoryEntity;
-import com.ecommerce.backend.entity.ProductEntity;
+import com.ecommerce.backend.entity.Categories;
+import com.ecommerce.backend.entity.Product;
 import com.ecommerce.backend.repository.CategoriesRepository;
 import com.ecommerce.backend.repository.ProductRepository;
 import org.springframework.http.HttpStatus;
@@ -31,12 +31,12 @@ public class ProdService  implements IProduct{
     @Override
     @Transactional(rollbackOn = Exception.class)
     public String create(ReqCreateProduct product) throws IOException {
-        CategoryEntity category = categoriesRepository.getByName(
+        Categories category = categoriesRepository.getByName(
                 product.getCategoryName()
         ).orElseThrow(
                 () -> new BaseException("Category Name not found.",HttpStatus.BAD_REQUEST)
         );
-        ProductEntity entity = new ProductEntity();
+        Product entity = new Product();
         String image = helper.saveFileImageWithBase64(product.getImageBase64(), "static/products", product.getOriginalFile());
 
         entity.setCategory(category);

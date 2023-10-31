@@ -3,13 +3,18 @@ package com.ecommerce.backend.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Builder;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "categories")
-public class CategoryEntity extends BaseEntity {
+@Table(name = "categories",uniqueConstraints = {
+        @UniqueConstraint(
+                name = "category_name_unique",
+                columnNames = "name"
+        )
+})
+public class Categories extends BaseEntity {
 
-    @Column(unique = true, nullable = false,length = 50)
+    @Column(nullable = false,length = 50)
     private String name;
 
     public String getName() {

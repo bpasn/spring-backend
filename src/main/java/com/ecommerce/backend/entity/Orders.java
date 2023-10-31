@@ -15,11 +15,11 @@ import lombok.Setter;
 @Table(name = "orders")
 @Getter
 @Setter
-public class OrdersEntity extends BaseEntity {
+public class Orders extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
-    private UserEntity user;
+    private Users user;
 
     private LocalDateTime orderDate;
 

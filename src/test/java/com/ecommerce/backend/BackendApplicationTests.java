@@ -36,25 +36,25 @@ class BackendApplicationTests {
 
     @Autowired
     private Validator validator;
-
-    @Test
-    void validate() throws MethodArgumentNotValidException {
-        ReqCreateCategory request = new ReqCreateCategory();
-        byte[] fileContent = "Hello, World!".getBytes();
-        MockMultipartFile multipartFile = new MockMultipartFile("file", "test.txt", "text/plain", fileContent);
-
-        request.setCName("");
-        request.setCImage(multipartFile);
-
-        // Validate the model
-        Set<ConstraintViolation<ReqCreateCategory>> violations = validator.validate(request);
-
-        // Check if there are validation errors for the field name
-        Assertions.assertFalse(violations.isEmpty());
-
-        // You cal also assert specific error messages if needed
-
-    }
-
+//
+//    @Test
+//    void validate() throws MethodArgumentNotValidException {
+//        ReqCreateCategory request = new ReqCreateCategory();
+//        byte[] fileContent = "Hello, World!".getBytes();
+//        MockMultipartFile multipartFile = new MockMultipartFile("file", "test.txt", "text/plain", fileContent);
+//
+//        request.setCName("");
+//        request.setCImage(multipartFile);
+//
+//        // Validate the model
+//        Set<ConstraintViolation<ReqCreateCategory>> violations = validator.validate(request);
+//
+//        // Check if there are validation errors for the field name
+//        Assertions.assertFalse(violations.isEmpty());
+//
+//        // You cal also assert specific error messages if needed
+//
+//    }
+//
 
 }

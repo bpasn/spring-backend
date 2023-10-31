@@ -5,14 +5,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Set;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "products")
-public class ProductEntity extends BaseEntity{
+public class Product extends BaseEntity{
     @Column(name = "name", length = 100)
     private String name;
 
@@ -29,7 +28,7 @@ public class ProductEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private CategoryEntity category;
+    private Categories category;
 
     @ManyToOne
     @JoinColumn(name = "sub_category_id")
@@ -37,5 +36,5 @@ public class ProductEntity extends BaseEntity{
 
     @OneToMany
     @JoinColumn(name = "image_id")
-    private Set<ImageProductEntity> images;
+    private Set<ImageProduct> images;
 }
