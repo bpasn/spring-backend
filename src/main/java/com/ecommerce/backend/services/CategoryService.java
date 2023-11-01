@@ -6,7 +6,6 @@ import java.util.List;
 import com.ecommerce.backend.controllers.categories.CategoriesDTO;
 import com.ecommerce.backend.controllers.categories.ReqCreateCategory;
 import com.ecommerce.backend.interfaces.ICategory;
-import com.ecommerce.backend.repository.CategoriesRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ import com.ecommerce.backend.controllers.categories.CategoryMapper;
 import com.ecommerce.backend.entity.Categories;
 
 @Service
-public class CategoryService extends GenericService<Categories> implements ICategory {
+public class CategoryService extends GenericServiceImp<Categories> implements ICategory {
 
     private final Helper helper;
     private final CategoryMapper mapper;

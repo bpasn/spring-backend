@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public class GenericService<Entity> implements IGenericService<Entity> {
+public class GenericServiceImp<Entity> implements IGenericService<Entity> {
     @Autowired
     private JpaRepository<Entity, Integer> jpaRepository;
 
