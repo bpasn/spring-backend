@@ -1,15 +1,20 @@
 package com.ecommerce.backend.services;
 
 import com.ecommerce.backend.interfaces.IGenericService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.ecommerce.backend.mapper.MapperGeneric;
+import com.ecommerce.backend.repository.GenericRepo;
 
 import java.util.List;
 
-public class GenericServiceImp<Entity> implements IGenericService<Entity> {
-    @Autowired
-    private JpaRepository<Entity, Integer> jpaRepository;
+public class GenericServiceImp<Entity,DTO> implements IGenericService<Entity> {
+    private final GenericRepo<Entity> jpaRepository;
 
+    private final MapperGeneric<Entity,DTO>  mapper;
+
+    public GenericServiceImp(GenericRepo<Entity> jpaRepository, MapperGeneric<Entity,DTO> mapper){
+        this.jpaRepository = jpaRepository;
+        this.mapper = mapper;
+    }
     @Override
     public List<Entity> getAll() {
         return jpaRepository.findAll();
