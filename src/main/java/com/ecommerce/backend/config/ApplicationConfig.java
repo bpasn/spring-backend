@@ -5,6 +5,7 @@ import com.ecommerce.backend.repository.UserRepository;
 
 import lombok.extern.log4j.Log4j2;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,11 @@ public class ApplicationConfig {
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    ModelMapper modelMapper(){
+        return new ModelMapper();
     }
 
 }

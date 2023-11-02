@@ -5,35 +5,32 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.ecommerce.backend.controllers.categories.CategoriesDTO;
+import com.ecommerce.backend.controllers.categories.CategoryMapper;
 import com.ecommerce.backend.controllers.categories.ReqCreateCategory;
 import com.ecommerce.backend.interfaces.ICategory;
-import com.ecommerce.backend.mapper.MapperGeneric;
 import com.ecommerce.backend.repository.GenericRepo;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 
-import com.ecommerce.backend.controllers.categories.CategoryMapper;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import com.ecommerce.backend.entity.Categories;
 
 @Service
-public class CategoryService extends GenericServiceImp<Categories,CategoriesDTO> implements ICategory {
+public class CategoryService extends GenericServiceImp<Categories> implements ICategory {
 
-    private final Helper helper;
-    private final CategoryMapper mapper;
-    private final MapperGeneric<Categories,CategoriesDTO> mapperGeneric;
-    private final GenericRepo<Categories> repository;
     @Value("${APPLICATION.MOUNT_PATH}")
     private String BASE_PATH;
+    private final CategoryMapper mapper;
 
     
-    public CategoryService(Helper helper, CategoryMapper mapper, MapperGeneric<Categories,CategoriesDTO> mapperGeneric,GenericRepo<Categories> repository) {
-        super(repository,mapperGeneric);
-        this.repository = repository;
-        this.helper = helper;
+    public CategoryService( 
+        Helper helper,
+        GenericRepo<Categories> repository,
+        CategoryMapper mapper
+        ) {
+        super(repository);
         this.mapper = mapper;
-        this.mapperGeneric = mapperGeneric;
     }
 
     @Override
@@ -45,8 +42,8 @@ public class CategoryService extends GenericServiceImp<Categories,CategoriesDTO>
     }
 
     @Override
-    public List<CategoriesDTO>getToDTO(){
-        return this.getAll().stream().map(mapper::toDTO).collect(Collectors.toList());
+    public List<CategoriesDTO> getToDTO() {
+        return getAll().stream().map(mapper::toDTO).collect(Collectors.toList());
     }
 
 //

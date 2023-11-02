@@ -3,6 +3,8 @@ package com.ecommerce.backend.interfaces;
 import java.util.List;
 
 public interface IGenericService<Entity> {
+    
+   
     List<Entity> getAll();
     Entity getById(Integer id);
     Entity create(Entity entity);

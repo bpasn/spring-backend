@@ -1,19 +1,16 @@
 package com.ecommerce.backend.services;
 
+import com.ecommerce.backend.entity.Categories;
 import com.ecommerce.backend.entity.Product;
 import com.ecommerce.backend.repository.GenericRepo;
 import org.springframework.stereotype.Service;
 
+import com.ecommerce.backend.controllers.categories.CategoriesDTO;
 import com.ecommerce.backend.controllers.product.ProductDTO;
-import com.ecommerce.backend.mapper.MapperGeneric;
 
 
 @Service
-public class ProdService extends GenericServiceImp<Product,ProductDTO> {
-
-    private final Helper helper;
-    private final GenericRepo<Product> repo;
-    private final MapperGeneric<Product,ProductDTO> mapper;
+public class ProdService  {
 
 
 //     @Override
@@ -38,15 +35,12 @@ public class ProdService extends GenericServiceImp<Product,ProductDTO> {
 //        return "Create Product Successfully";
 //     }
 
-    public ProdService(
-        GenericRepo<Product> jpaRepository, 
-        MapperGeneric<Product, ProductDTO> mapper, 
-        Helper helper
-        ) {
-        super(jpaRepository, mapper);
-        this.helper = helper;
-        this.repo = jpaRepository;
-        this.mapper = mapper;
-    }
+    // public ProdService(
+    //     GenericRepo<Product> jpaRepository, 
+    //     Helper helper
+    //     ) {
+    //     super(jpaRepository,Categories.class,CategoriesDTO.class);
+    //     this.helper = helper;
+    // }
 
 }

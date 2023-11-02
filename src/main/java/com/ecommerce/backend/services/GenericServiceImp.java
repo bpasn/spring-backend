@@ -1,42 +1,45 @@
 package com.ecommerce.backend.services;
 
 import com.ecommerce.backend.interfaces.IGenericService;
-import com.ecommerce.backend.mapper.MapperGeneric;
 import com.ecommerce.backend.repository.GenericRepo;
 
 import java.util.List;
 
-public class GenericServiceImp<Entity,DTO> implements IGenericService<Entity> {
-    private final GenericRepo<Entity> jpaRepository;
 
-    private final MapperGeneric<Entity,DTO>  mapper;
 
-    public GenericServiceImp(GenericRepo<Entity> jpaRepository, MapperGeneric<Entity,DTO> mapper){
+public class GenericServiceImp<E> implements IGenericService<E> {
+    
+    private final GenericRepo<E> jpaRepository;
+
+    public GenericServiceImp(
+        GenericRepo<E> jpaRepository
+        ) {
         this.jpaRepository = jpaRepository;
-        this.mapper = mapper;
     }
+   
+
     @Override
-    public List<Entity> getAll() {
+    public List<E> getAll() {
         return jpaRepository.findAll();
     }
 
     @Override
-    public Entity getById(Integer id) {
+    public E getById(Integer id) {
         return null;
     }
 
     @Override
-    public Entity create(Entity entity) {
-        return jpaRepository.save(entity);
-    }
-
-    @Override
-    public Entity update(Entity e) {
+    public E create(E e) {
         return jpaRepository.save(e);
     }
 
     @Override
-    public void delete(Entity e) {
+    public E update(E e) {
+        return jpaRepository.save(e);
+    }
+
+    @Override
+    public void delete(E e) {
         jpaRepository.delete(e);
     }
 

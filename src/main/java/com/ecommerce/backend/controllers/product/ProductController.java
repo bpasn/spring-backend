@@ -21,9 +21,9 @@ public class ProductController {
         this.service = service;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<String> create(@Valid @RequestBody ReqCreateProduct product) throws IOException {
-        return ResponseEntity.status(201).body(service.create(product));
-    }
+    // @PostMapping("/create")
+    // public ResponseEntity<String> create(@Valid @RequestBody ReqCreateProduct product) throws IOException {
+    //     return ResponseEntity.status(201).body(service.create(product));
+    // }
 
 }
