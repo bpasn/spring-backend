@@ -2,10 +2,10 @@ package com.ecommerce.backend.interfaces;
 
 import java.io.IOException;
 
-import com.ecommerce.backend.controllers.product.ReqCreateProduct;
+import com.ecommerce.backend.controllers.product.CreateProductRequest;
 
 public interface IProduct{
-    String create(ReqCreateProduct product) throws IOException;
+    String create(CreateProductRequest product) throws IOException;
     String update();
     String delete();
 }

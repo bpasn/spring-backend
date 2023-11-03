@@ -13,7 +13,7 @@ import lombok.ToString;
 @Data
 @Setter
 @Getter
-public class ReqCreateProduct {
+public class CreateProductRequest {
     @NotNull(message = "Field Name is required.")
     private String name;
 

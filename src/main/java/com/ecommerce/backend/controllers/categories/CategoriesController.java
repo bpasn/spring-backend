@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.backend.Exception.BaseException;
+import com.ecommerce.backend.dto.CategoriesDTO;
 import com.ecommerce.backend.services.CategoryService;
 
 import jakarta.validation.Valid;
@@ -31,7 +32,7 @@ public class CategoriesController {
     }
 
     @PostMapping(path = "create", consumes = { "multipart/form-data" })
-    ResponseEntity<String> create(@Valid @ModelAttribute ReqCreateCategory request)
+    ResponseEntity<String> create(@Valid @ModelAttribute CreateCategoryRequest request)
             throws BaseException, MethodArgumentNotValidException, IOException {
 
         return ResponseEntity.status(201).body(service.create(request));
@@ -39,7 +40,7 @@ public class CategoriesController {
 
     @GetMapping(value = "/get-all")
     public ResponseEntity<List<CategoriesDTO>> getAll() {
-        return ResponseEntity.ok(service.getToDTO());
+        return ResponseEntity.ok(service.getAllToDto());
     }
 //
 //    @GetMapping(value = "/get/{id}")

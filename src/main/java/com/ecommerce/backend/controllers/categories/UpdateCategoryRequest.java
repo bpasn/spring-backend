@@ -9,7 +9,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class ReqUpdateCategory {
+public class UpdateCategoryRequest {
     private String id;
     private String cName;
 }

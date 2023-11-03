@@ -1,22 +1,20 @@
 package com.ecommerce.backend.services;
 
 import com.ecommerce.backend.interfaces.IGenericService;
+import com.ecommerce.backend.mapper.MappingClass;
 import com.ecommerce.backend.repository.GenericRepo;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-
-
-public class GenericServiceImp<E> implements IGenericService<E> {
-    
+public class GenericServiceImp<E, DTO> implements IGenericService<E, DTO> {
     private final GenericRepo<E> jpaRepository;
+    private final MappingClass<E, DTO> mappingClass;
 
-    public GenericServiceImp(
-        GenericRepo<E> jpaRepository
-        ) {
+    public GenericServiceImp(GenericRepo<E> jpaRepository, MappingClass<E, DTO> mappingClass) {
         this.jpaRepository = jpaRepository;
+        this.mappingClass = mappingClass;
     }
-   
 
     @Override
     public List<E> getAll() {
@@ -25,7 +23,21 @@ public class GenericServiceImp<E> implements IGenericService<E> {
 
     @Override
     public E getById(Integer id) {
-        return null;
+        return jpaRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<DTO> getAllToDto() {
+        return jpaRepository
+                .findAll()
+                .stream()
+                .map(mappingClass::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public DTO getByIdToDto(Integer id) {
+        return mappingClass.toDTO(jpaRepository.findById(id).orElse(null));
     }
 
     @Override
