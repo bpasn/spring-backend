@@ -1,0 +1,714 @@
+{
+	"info": {
+		"_postman_id": "fea0a5de-c232-4eff-b38d-b89588468c21",
+		"name": "Ecommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14730541"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "CreateUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var token = JSON.parse(responseBody).token;",
+									"pm.environment.set(\"TOKEN\",token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\":\"example\",\n    \"lastName\":\"test\",\n    \"email\":\"example@backend.com\",\n    \"password\":\"P@ssw0rd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/auth/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var token = JSON.parse(responseBody).token;",
+									"pm.environment.set(\"TOKEN\",token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"example@backend.com\",\n    \"password\":\"P@ssw0rd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/auth/authentication",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"authentication"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cName",
+									"value": "Home & Kitchen Under",
+									"type": "text"
+								},
+								{
+									"key": "cImage",
+									"type": "file",
+									"src": "/D:/OneDrive - 2J Solution & Service Co.,Ltd/Desktop/Home_Kitchen_.jpg"
+								},
+								{
+									"key": "cDescription",
+									"value": "บ้านและสวน",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/category/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cName",
+									"value": "Gaming accessories",
+									"type": "text"
+								},
+								{
+									"key": "cImage",
+									"type": "file",
+									"src": "/D:/OneDrive - 2J Solution & Service Co.,Ltd/Desktop/GamingAccessoriesUpdate.jpg"
+								},
+								{
+									"key": "cDescription",
+									"value": "อุปกรณ์เล่นเกม update",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/category/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/category/delete/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/category/get",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/category/get/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"get",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"description\": \" Premium soft PU leather accented with hand-sewing diamond cross stitching,more comfortable and durable than normal leather, giving better cushioning and support like sleeping on mattress,skin-friendly,waterproof,Dirt,Fade&Tear resistant and easy to clean. 4.3 in thick seat cushion made of high density shaped foam,it has great resilience and breathability ,comfortable to sit for long time working and gaming\",\r\n    \"price\": 169.99,\r\n    \"stockQuantity\": 20,\r\n    \"originalFile\": \"chair.jpg\",\r\n    \"categoryName\":\"Gaming accessories\",\r\n    \"imagebase64\": \"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\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/product/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cName",
+									"value": "Gaming accessories",
+									"type": "text"
+								},
+								{
+									"key": "cImage",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "cDescription",
+									"value": "อุปกรณ์เล่นเกม update",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/category/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/category/delete/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/category/get",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/category/get/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"get",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PrivateRoute",
+			"item": [
+				{
+					"name": "testController",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"example@example.com\",\n    \"username\":\"example\",\n    \"password\":\"P@ssw0rd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/test",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

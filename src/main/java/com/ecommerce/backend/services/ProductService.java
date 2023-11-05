@@ -2,10 +2,14 @@ package com.ecommerce.backend.services;
 
 import com.ecommerce.backend.entity.Categories;
 import com.ecommerce.backend.entity.Product;
+import com.ecommerce.backend.interfaces.IProduct;
+import com.ecommerce.backend.mapper.CategoryMapper;
 import com.ecommerce.backend.mapper.MappingClass;
+import com.ecommerce.backend.mapper.ProductMapper;
 import com.ecommerce.backend.repository.CategoriesRepository;
 import com.ecommerce.backend.repository.GenericRepo;
 
+import com.ecommerce.backend.repository.ProductRepository;
 import io.jsonwebtoken.io.IOException;
 import jakarta.transaction.Transactional;
 
@@ -17,19 +21,22 @@ import com.ecommerce.backend.controllers.product.CreateProductRequest;
 import com.ecommerce.backend.dto.ProductDTO;
 
 @Service
-public class ProductService extends GenericServiceImp<Product, ProductDTO> {
+public class ProductService extends GenericServiceImp<Product,ProductRepository, ProductDTO> implements IProduct {
 
-    private final CategoriesRepository categoriesRepository;
+    private final GenericRepo<Categories> categoriesRepository;
 
-    public ProductService(
-            GenericRepo<Product> jpaRepository,
-            MappingClass<Product, ProductDTO> mappingClass,
-            CategoriesRepository categoriesRepository) {
-        super(jpaRepository, mappingClass);
+     public ProductService(
+            Helper helper,
+            ProductRepository repository,
+            ProductMapper mappingClass,
+            GenericRepo<Categories> categoriesRepository
+            ) {
+        super(repository, mappingClass);
         this.categoriesRepository = categoriesRepository;
     }
 
     @Transactional(rollbackOn = Exception.class)
+    @Override
     public String create(CreateProductRequest product) throws IOException {
         Categories category = categoriesRepository.getByName(
                 product.getCategoryName()).orElseThrow(

@@ -1,21 +1,34 @@
 package com.ecommerce.backend.services;
 
+import com.ecommerce.backend.dto.DataTableDTO;
 import com.ecommerce.backend.interfaces.IGenericService;
 import com.ecommerce.backend.mapper.MappingClass;
 import com.ecommerce.backend.repository.GenericRepo;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GenericServiceImp<E, DTO> implements IGenericService<E, DTO> {
-    private final GenericRepo<E> jpaRepository;
-    private final MappingClass<E, DTO> mappingClass;
 
-    public GenericServiceImp(GenericRepo<E> jpaRepository, MappingClass<E, DTO> mappingClass) {
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+
+@Log4j2
+public class GenericServiceImp<E,R extends GenericRepo<E>, DTO> implements IGenericService<E, DTO> {
+    private final R jpaRepository;
+    private final MappingClass<E, DTO> mappingClass;
+    public GenericServiceImp(R jpaRepository, MappingClass<E, DTO> mappingClass) {
         this.jpaRepository = jpaRepository;
         this.mappingClass = mappingClass;
     }
 
+    public R getJpaRepository(){
+        return jpaRepository;
+    }
+    public MappingClass<E, DTO> getMapping(){
+        return mappingClass;
+    }
     @Override
     public List<E> getAll() {
         return jpaRepository.findAll();
@@ -24,6 +37,11 @@ public class GenericServiceImp<E, DTO> implements IGenericService<E, DTO> {
     @Override
     public E getById(Integer id) {
         return jpaRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public E getByName(String name) {
+        return jpaRepository.getByName(name).orElse(null);
     }
 
     @Override
@@ -63,5 +81,31 @@ public class GenericServiceImp<E, DTO> implements IGenericService<E, DTO> {
     @Override
     public long count() {
         return jpaRepository.count();
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return jpaRepository.existsByName(name);
+    }
+
+    @Override
+    public DataTableDTO<DTO> getDataTable(
+            Integer page,
+            Integer pageSize) {
+        DataTableDTO<DTO> dataTableDTO = new DataTableDTO<DTO>();
+                log.info("PAGE : " + page);
+                log.info("PAGESIZE : " + pageSize);
+        long _count = this.count();
+        List<DTO> lists = jpaRepository.findAll(
+                PageRequest
+                        .of(page, pageSize)
+                        .withSort(Sort.Direction.ASC, "id")
+                        )
+                .stream()
+                .map(mappingClass::toDTO)
+                .collect(Collectors.toList());
+        dataTableDTO.setCount(_count);
+        dataTableDTO.setDataTable(lists);
+        return dataTableDTO;
     }
 }

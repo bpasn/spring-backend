@@ -1,11 +1,15 @@
 package com.ecommerce.backend.services;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.ecommerce.backend.controllers.categories.CreateCategoryRequest;
 import com.ecommerce.backend.dto.CategoriesDTO;
+import com.ecommerce.backend.dto.DataTableDTO;
 import com.ecommerce.backend.interfaces.ICategory;
 import com.ecommerce.backend.mapper.CategoryMapper;
+import com.ecommerce.backend.repository.CategoriesRepository;
 import com.ecommerce.backend.repository.GenericRepo;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -13,14 +17,14 @@ import org.springframework.stereotype.Service;
 import com.ecommerce.backend.entity.Categories;
 
 @Service
-public class CategoryService extends GenericServiceImp<Categories, CategoriesDTO> implements ICategory {
+public class CategoryService extends GenericServiceImp<Categories, CategoriesRepository, CategoriesDTO> implements ICategory {
 
     @Value("${APPLICATION.MOUNT_PATH}")
     private String BASE_PATH;
 
     public CategoryService(
             Helper helper,
-            GenericRepo<Categories> repository,
+            CategoriesRepository repository,
             CategoryMapper mappingClass) {
         super(repository, mappingClass);
     }
@@ -31,6 +35,23 @@ public class CategoryService extends GenericServiceImp<Categories, CategoriesDTO
         c.setName(request.name());
         super.create(c);
         return "Create Category Successfully";
+    }
+
+    @Override
+    public DataTableDTO<CategoriesDTO> getDataTable(
+            Integer page,
+            Integer pageSize){
+        CategoriesRepository repository = getJpaRepository();
+        long _count = count();
+        List<CategoriesDTO> dto = repository
+                .findByNative("h")
+                .stream()
+                .map(getMapping()::toDTO)
+                .collect(Collectors.toList());
+        DataTableDTO dataTableDTO = new DataTableDTO();
+        dataTableDTO.setDataTable(dto);
+        dataTableDTO.setCount(_count);
+        return dataTableDTO;
     }
 
     //
