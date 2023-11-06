@@ -1,7 +1,7 @@
 package com.ecommerce.backend.mapper;
 
 import com.ecommerce.backend.dto.ProductDTO;
-import com.ecommerce.backend.entity.Product;
+import com.ecommerce.backend.entities.Product;
 
 import org.mapstruct.Mapper;
 

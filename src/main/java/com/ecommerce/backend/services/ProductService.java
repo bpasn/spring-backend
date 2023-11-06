@@ -1,12 +1,9 @@
 package com.ecommerce.backend.services;
 
-import com.ecommerce.backend.entity.Categories;
-import com.ecommerce.backend.entity.Product;
+import com.ecommerce.backend.entities.Categories;
+import com.ecommerce.backend.entities.Product;
 import com.ecommerce.backend.interfaces.IProduct;
-import com.ecommerce.backend.mapper.CategoryMapper;
-import com.ecommerce.backend.mapper.MappingClass;
 import com.ecommerce.backend.mapper.ProductMapper;
-import com.ecommerce.backend.repository.CategoriesRepository;
 import com.ecommerce.backend.repository.GenericRepo;
 
 import com.ecommerce.backend.repository.ProductRepository;

@@ -1,6 +1,6 @@
 package com.ecommerce.backend.repository;
 
-import com.ecommerce.backend.entity.Categories;
+import com.ecommerce.backend.entities.Categories;
 
 
 import org.springframework.data.jpa.repository.Query;

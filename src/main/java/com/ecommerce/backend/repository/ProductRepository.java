@@ -1,6 +1,6 @@
 package com.ecommerce.backend.repository;
 
-import com.ecommerce.backend.entity.Product;
+import com.ecommerce.backend.entities.Product;
 import org.springframework.stereotype.Repository;
 
 @Repository

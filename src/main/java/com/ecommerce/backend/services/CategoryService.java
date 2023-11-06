@@ -10,11 +10,10 @@ import com.ecommerce.backend.dto.DataTableDTO;
 import com.ecommerce.backend.interfaces.ICategory;
 import com.ecommerce.backend.mapper.CategoryMapper;
 import com.ecommerce.backend.repository.CategoriesRepository;
-import com.ecommerce.backend.repository.GenericRepo;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import com.ecommerce.backend.entity.Categories;
+import com.ecommerce.backend.entities.Categories;
 
 @Service
 public class CategoryService extends GenericServiceImp<Categories, CategoriesRepository, CategoriesDTO> implements ICategory {

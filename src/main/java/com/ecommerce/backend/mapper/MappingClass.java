@@ -4,6 +4,6 @@ import org.mapstruct.control.NoComplexMapping;
 
 @NoComplexMapping
 public interface MappingClass<E,D> {
-    E toEntity(D d);
+//    E toEntity(D d);
     D toDTO(E e);
 }

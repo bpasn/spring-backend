@@ -51,7 +51,6 @@ public class CategoriesController {
 
     @GetMapping(path = "dataTable")
     public ResponseEntity<DataTableDTO<CategoriesDTO>> getDatatable(@ModelAttribute DataTableRequest request) {
-        log.info(request.toString());
         return ResponseEntity.ok(service.getDataTable(
                 request.getPage(),
                 request.getPageSize()));

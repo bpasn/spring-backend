@@ -1,18 +1,11 @@
 package com.ecommerce.backend;
 
-import com.ecommerce.backend.entity.Categories;
-import com.ecommerce.backend.entity.SubCategory;
 import com.ecommerce.backend.repository.CategoriesRepository;
 import com.ecommerce.backend.repository.SubCategoryRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
-
-import java.io.File;
-import java.util.Arrays;
 
 @Log4j2
 @Component

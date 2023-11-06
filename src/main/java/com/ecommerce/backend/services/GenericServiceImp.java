@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 @Log4j2
@@ -93,18 +94,12 @@ public class GenericServiceImp<E,R extends GenericRepo<E>, DTO> implements IGene
             Integer page,
             Integer pageSize) {
         DataTableDTO<DTO> dataTableDTO = new DataTableDTO<DTO>();
-                log.info("PAGE : " + page);
-                log.info("PAGESIZE : " + pageSize);
-        long _count = this.count();
-        List<DTO> lists = jpaRepository.findAll(
-                PageRequest
-                        .of(page, pageSize)
-                        .withSort(Sort.Direction.ASC, "id")
-                        )
+        Pageable p = PageRequest.of(page,pageSize).withSort(Sort.Direction.ASC,"id");
+        List<DTO> lists = jpaRepository.findAll(p)
                 .stream()
                 .map(mappingClass::toDTO)
                 .collect(Collectors.toList());
-        dataTableDTO.setCount(_count);
+        dataTableDTO.setCount(count());
         dataTableDTO.setDataTable(lists);
         return dataTableDTO;
     }

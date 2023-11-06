@@ -1,4 +1,4 @@
-package com.ecommerce.backend.entity;
+package com.ecommerce.backend.entities;
 
 import com.ecommerce.backend.enums.Role;
 import jakarta.persistence.Column;

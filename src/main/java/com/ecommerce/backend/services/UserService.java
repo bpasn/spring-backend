@@ -3,7 +3,7 @@ package com.ecommerce.backend.services;
 import com.ecommerce.backend.Exception.BaseException;
 import com.ecommerce.backend.controllers.auth.AuthenticateResponse;
 import com.ecommerce.backend.controllers.auth.AuthenticationRequest;
-import com.ecommerce.backend.entity.Users;
+import com.ecommerce.backend.entities.Users;
 import com.ecommerce.backend.enums.Role;
 import com.ecommerce.backend.interfaces.IUserService;
 import com.ecommerce.backend.repository.UserRepository;

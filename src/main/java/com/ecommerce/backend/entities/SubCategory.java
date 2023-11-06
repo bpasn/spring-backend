@@ -1,4 +1,4 @@
-package com.ecommerce.backend.entity;
+package com.ecommerce.backend.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -11,7 +11,6 @@ import lombok.EqualsAndHashCode;
 @Entity(name = "sub_category")
 public class SubCategory extends BaseEntity{
     private String name;
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Categories category;
