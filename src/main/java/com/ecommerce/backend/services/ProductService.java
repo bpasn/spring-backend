@@ -32,19 +32,19 @@ public class ProductService extends GenericServiceImp<Product,ProductRepository,
         this.categoriesRepository = categoriesRepository;
     }
 
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional
     @Override
     public String create(CreateProductRequest product) throws IOException {
         Categories category = categoriesRepository.getByName(
                 product.getCategoryName()).orElseThrow(
-                        () -> new BaseException("Category Name not found.", HttpStatus.BAD_REQUEST));
+                        () -> new BaseException("Category Name not found.", HttpStatus.OK));
         Product entity = new Product();
-        entity.setCategory(category);
+        entity.setCategories(category);
         entity.setName(product.getName());
         entity.setDescription(product.getDescription());
         entity.setPrice(product.getPrice());
-        entity.setStockQuantity(product.getStockQuantity());
-        super.create(entity);
+        entity.setQuantity(product.getStockQuantity());
+        this.getJpaRepository().save(entity);
         return "Create Product Successfully";
     }
 }

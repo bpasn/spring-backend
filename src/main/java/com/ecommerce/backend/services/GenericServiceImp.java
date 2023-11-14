@@ -60,16 +60,6 @@ public class GenericServiceImp<E,R extends GenericRepo<E>, DTO> implements IGene
     }
 
     @Override
-    public E create(E e) {
-        return jpaRepository.save(e);
-    }
-
-    @Override
-    public E update(E e) {
-        return jpaRepository.save(e);
-    }
-
-    @Override
     public void delete(E e) {
         jpaRepository.delete(e);
     }

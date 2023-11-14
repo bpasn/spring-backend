@@ -1,6 +1,7 @@
 package com.ecommerce.backend.component;
 
 import com.ecommerce.backend.Exception.BaseException;
+import com.ecommerce.backend.Exception.Unauthorization;
 import com.ecommerce.backend.services.JwtService;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.FilterChain;
@@ -11,6 +12,7 @@ import lombok.extern.log4j.Log4j2;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -63,7 +65,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (Exception e) {
             log.error("EXCEPTION AUTHENTICATION {}", e.getMessage());
-            resolver.resolveException(request, response, null, new BaseException(e.getMessage(), null));
+            resolver.resolveException(request, response, null, new BaseException(e.getMessage(),HttpStatus.UNAUTHORIZED));
         }
     }
 
@@ -77,7 +79,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
     private void handleInvalidToken(HttpServletRequest request, HttpServletResponse response){
-        resolver.resolveException(request,response,null,new BaseException("Token is Invalid"));
+        resolver.resolveException(request,response,null,new BaseException("Token is Invalid",HttpStatus.UNAUTHORIZED));
     }
 
     private void handleValidToken(String userEmail,String jwt,HttpServletRequest request){

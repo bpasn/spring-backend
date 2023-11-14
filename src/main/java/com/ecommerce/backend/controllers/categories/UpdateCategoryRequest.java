@@ -11,5 +11,5 @@ import lombok.ToString;
 @ToString
 public class UpdateCategoryRequest {
     private String id;
-    private String cName;
+    private String name;
 }

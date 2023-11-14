@@ -15,6 +15,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 @Log4j2
@@ -39,36 +40,50 @@ public class HandleErrorControllerAdvice {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(HibernateException.class)
-    public ResponseEntity<ExceptionBase> handleMethodException(HibernateException ex) {
-        ExceptionBase response = new ExceptionBase();
-        response.setMessage(ex.getMessage());
-        response.setSuccess(false);
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResponseEntity<ExceptionBase> handleMethodException(HttpRequestMethodNotSupportedException ex) {
-        ExceptionBase response = new ExceptionBase();
-        response.setMessage(ex.getMessage());
-        response.setSuccess(false);
-        return new ResponseEntity<>(response, HttpStatus.METHOD_NOT_ALLOWED);
-    }
+//    @ExceptionHandler(HibernateException.class)
+//    public ResponseEntity<ExceptionBase> handleMethodException(HibernateException ex) {
+//        ExceptionBase response = new ExceptionBase();
+//        response.setMessage(ex.getMessage());
+//        response.setSuccess(false);
+//        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+//    }
+//
+//    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+//    public ResponseEntity<ExceptionBase> handleMethodException(HttpRequestMethodNotSupportedException ex) {
+//        ExceptionBase response = new ExceptionBase();
+//        response.setMessage(ex.getMessage());
+//        response.setSuccess(false);
+//        return new ResponseEntity<>(response, HttpStatus.METHOD_NOT_ALLOWED);
+//    }
 
     @ExceptionHandler(BaseException.class)
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ExceptionBase> handleMethodException(BaseException ex) {
         ExceptionBase response = new ExceptionBase();
         response.setMessage(ex.getMessage());
         response.setSuccess(false);
-        return new ResponseEntity<>(response,
-                ex.getStatus() != null ? ex.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR);
+        response.setCode(ex.getCode());
+        if(ex.getCode() == 401){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+        return ResponseEntity.ok(response);
     }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionBase> handleMethodException(Exception ex) {
         ExceptionBase response = new ExceptionBase();
         response.setMessage(ex.getMessage());
         response.setSuccess(false);
-        return new ResponseEntity<>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+        response.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+    @ExceptionHandler(Unauthorization.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResponseEntity<ExceptionBase> handleAuthorization(Unauthorization ex) {
+        ExceptionBase response = new ExceptionBase();
+        response.setMessage(ex.getMessage());
+        response.setSuccess(false);
+        response.setCode(ex.getCode());
+        return ResponseEntity.ok(response);
     }
 
 
@@ -81,6 +96,7 @@ public class HandleErrorControllerAdvice {
     @Data
     public static class ExceptionBase {
         private Boolean success;
+        private int code;
         private String message;
     }
 

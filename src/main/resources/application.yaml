@@ -17,7 +17,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     # กำหนกให้แสดงคำสั่ง SQL บน terminal
     # ภาษา SQL แบ่งคำสั่งออกเป็น 2 ส่วน
     # 1 ส่วนที่นิยามข้อมูล (Data Definition Language: DDL) เช่น คำสั่ง create/alter/drop table

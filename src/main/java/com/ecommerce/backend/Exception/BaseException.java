@@ -8,17 +8,11 @@ import org.springframework.http.HttpStatus;
 @EqualsAndHashCode(callSuper = true)
 public class BaseException extends RuntimeException {
     private Boolean success = false;
-    private HttpStatus status;
-
-    public BaseException(String msg){
-        super(msg);
-        setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-        setSuccess(false);
-    }
+    private int code;
     public BaseException(String msg,HttpStatus status){
         super(msg);
-        setStatus(status);
         setSuccess(false);
+        setCode(status.value());
     }
 
 }

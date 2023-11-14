@@ -1,9 +1,6 @@
 package com.ecommerce.backend.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,10 +8,10 @@ import lombok.EqualsAndHashCode;
 @Entity(name = "image_product")
 @Data
 public class ImageProduct extends BaseEntity{
-    @Column(columnDefinition = "TEXT")
+    @Lob
     private String image;
 
-    @JoinColumn(name = "product_id",nullable = false)
     @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
 }

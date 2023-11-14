@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.ecommerce.backend.Exception.BaseException;
 import com.ecommerce.backend.controllers.categories.CreateCategoryRequest;
+import com.ecommerce.backend.controllers.categories.UpdateCategoryRequest;
 import com.ecommerce.backend.dto.CategoriesDTO;
 import com.ecommerce.backend.dto.DataTableDTO;
 import com.ecommerce.backend.interfaces.ICategory;
@@ -12,6 +14,7 @@ import com.ecommerce.backend.mapper.CategoryMapper;
 import com.ecommerce.backend.repository.CategoriesRepository;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import com.ecommerce.backend.entities.Categories;
 
@@ -29,11 +32,18 @@ public class CategoryService extends GenericServiceImp<Categories, CategoriesRep
     }
 
     @Override
-    public String create(CreateCategoryRequest request) throws IOException {
+    public String create(CreateCategoryRequest request){
         Categories c = new Categories();
         c.setName(request.name());
-        super.create(c);
+        this.getJpaRepository().save(c);
         return "Create Category Successfully";
+    }
+    public String update(UpdateCategoryRequest req){
+        Categories c = this.getJpaRepository()
+                .findById(Integer.parseInt(req.getId()))
+                .orElseThrow(() -> new BaseException("Category not found!", HttpStatus.BAD_REQUEST));
+        this.getJpaRepository().save(c);
+        return "Update Category Successfully";
     }
 
     @Override

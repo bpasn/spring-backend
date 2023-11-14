@@ -20,16 +20,13 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/v1/product")
 public class ProductController {
     private final ProductService service;
-
     public ProductController(ProductService service) {
         this.service = service;
     }
-
     @PostMapping("/create")
     public ResponseEntity<String> create(@Valid @RequestBody CreateProductRequest product) throws IOException {
         return ResponseEntity.status(201).body(service.create(product));
     }
-
     @GetMapping("/get")
     public ResponseEntity<List<ProductDTO>> getAll(){
         return ResponseEntity.ok(service.getAllToDto());

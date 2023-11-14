@@ -2,12 +2,9 @@ package com.ecommerce.backend.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,19 +13,19 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Orders extends BaseEntity {
-
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private Users user;
 
-    private LocalDateTime orderDate;
+    @OneToMany
+    @JoinColumn(name = "order_item_id")
+    private List<OrderItem> orderItem;
+    private Boolean status = false;
+    private BigDecimal total;
+    private String phone;
+    private String address;
 
-    @Column(name = "status", length = 20)
-    private String status;
 
-    @Column(precision = 10, scale = 2)
-    private BigDecimal totalPrice;
 
-    @Column(length = 255)
-    private String shippingAddress;
+
 }

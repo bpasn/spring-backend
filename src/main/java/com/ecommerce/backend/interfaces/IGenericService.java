@@ -13,9 +13,6 @@ public interface IGenericService<Entity,DTO> {
 
     List<DTO> getAllToDto();
     DTO getByIdToDto(Integer id);
-    Entity create(Entity entity);
-
-    Entity update(Entity e);
     void delete(Entity e);
     void deleteById(Integer id);
     boolean existsByName(String name);

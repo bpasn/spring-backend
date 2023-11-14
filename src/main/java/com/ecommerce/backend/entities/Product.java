@@ -15,26 +15,26 @@ public class Product extends BaseEntity{
     @Column(name = "name", length = 100)
     private String name;
 
-    private String title;
-
-
-    @Column(name = "description", columnDefinition = "TEXT")
-    private String description;
-
-    @Column(name = "price", precision = 10, scale = 2)
-    private BigDecimal price;
-
-    private Integer stockQuantity;
-
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Categories category;
+    private Categories categories;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
 
     @ManyToOne
     @JoinColumn(name = "sub_category_id")
     private SubCategory subCategory;
 
+    @Lob
+    private String description;
+
     @OneToMany
     @JoinColumn(name = "image_id")
-    private Set<ImageProduct> images;
+    private Set<ImageProduct> image;
+
+    private BigDecimal price;
+    private Number quantity;
+
 }
