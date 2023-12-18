@@ -5,6 +5,7 @@ import com.ecommerce.backend.interfaces.IGenericService;
 import com.ecommerce.backend.mapper.MappingClass;
 import com.ecommerce.backend.repository.GenericRepo;
 
+import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 @Log4j2
+@Data
 public class GenericServiceImp<E,R extends GenericRepo<E>, DTO> implements IGenericService<E, DTO> {
     private final R jpaRepository;
     private final MappingClass<E, DTO> mappingClass;
@@ -24,9 +26,6 @@ public class GenericServiceImp<E,R extends GenericRepo<E>, DTO> implements IGene
         this.mappingClass = mappingClass;
     }
 
-    public R getJpaRepository(){
-        return jpaRepository;
-    }
     public MappingClass<E, DTO> getMapping(){
         return mappingClass;
     }

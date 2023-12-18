@@ -22,7 +22,6 @@ import jakarta.validation.Valid;
 @RequestMapping(path = "${apiPrefix}/category")
 @OpenAPIDefinition
 @SecurityRequirement(name = "bearerAuth")
-@Log4j2
 public class CategoriesController {
 
     private final CategoryService service;
@@ -44,7 +43,7 @@ public class CategoriesController {
     }
     @DeleteMapping("/delete/{id}")
     ResponseEntity<String> delete(@RequestPart(name = "id") Integer id)
-            throws BaseException, MethodArgumentNotValidException, IOException {
+            throws BaseException {
         service.deleteById(id);
         return ResponseEntity.status(201).body("Delete category successfully!");
     }
@@ -54,7 +53,7 @@ public class CategoriesController {
         return ResponseEntity.ok(service.getAllToDto());
     }
 
-    @GetMapping(path = "dataTable")
+    @GetMapping("dataTable")
     public ResponseEntity<DataTableDTO<CategoriesDTO>> getDatatable(@ModelAttribute DataTableRequest request) {
         return ResponseEntity.ok(service.getDataTable(
                 request.getPage(),
